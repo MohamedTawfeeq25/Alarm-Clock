@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Alarm</title>
+</head>
+<body>
+    <div id="cont">
+        <div id="nav">
+            <div id="nave">
+                <p><a href="./index.html">Clock</a></p>
+                <p><a href="">Timer</a></p>
+                <p><a href="./alarm.html">Alarm</a></p>
+            </div>
+            
+        </div>
+        <div id="clock">
+            <div id="alarm">
+                <div id="addalm">
+                    <button id="adda" onClick="Display()">Add Alarm</button>
+                </div>
+                <div id="seta">
+                    
+                        <div id="atime"><input type="number" placeholder="Hours"  id="a-hours" min="1" max="23"><input type="number"  placeholder="Minutes" id="a-min" min="0" max="59"></div>
+                        <div id="abut"><input type="button" id="cancel" onclick="Cancel()" value="cancel"><input type="button" onclick="add()" id="add" value="Add"></div>
+                       
+                </div>
+                <div id="almlist">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="alarm.js"></script>
+</body>
+</html>
