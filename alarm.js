@@ -1,6 +1,7 @@
 var hours;
-var mins;
+var mins;var alarm;
 const date=new Date();
+
 
 function Display(){
     document.getElementById('seta').style="display:grid";
@@ -26,7 +27,7 @@ function add(){
          }
          var alm="alarm"+localStorage.length;
          localStorage.setItem(alm,hours+":"+mins);
-         alert('alarm added');
+         new Notification("Alarm Added");
          document.getElementById('a-hours').value="";
         document.getElementById('a-min').value="";
     }
@@ -64,13 +65,20 @@ function Alarm(){
             
             
         }
-        console.log("checking"+alarm);
+        console.log("working");
 		if(alarm=="on"){
-			
+			new Notification("Alarm");
+            var con=confirm("Do You Need to cancel the alarm");
+
+            if(con==true){
+                clearInterval(int);
+                console.clear();
+                setInterval(()=>{window.location.reload()},60000);
+            }
 		}
     }
 
 
 }
 
-window.setInterval(()=>{Alarm()},1000);
+var int=window.setInterval(()=>{Alarm()},1000);
