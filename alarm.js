@@ -42,9 +42,11 @@ function Alarm(){
     const date=new Date();
     if(localStorage.length>0){
         var chou;var cmin;var alarm="off";
-        for(var i=1;i<=localStorage.length;i++){
-            var no=i-1;
-            var time=localStorage.getItem("alarm"+no);
+        var loc=localStorage;
+        var arr=Object.keys(loc);
+        for(var i=0;i<arr.length;i++){
+        
+            var time=localStorage.getItem(arr[i]);
             var alm=time[0]+time[1]+":"+time[3]+time[4];
             if(date.getHours()<10){
                 chou="0"+date.getHours();
@@ -80,5 +82,42 @@ function Alarm(){
 
 
 }
+function Getalarm(){
+    var box=document.getElementById("list");
+    if(localStorage.length>0){
+        var loc=localStorage;
+        var arr=Object.keys(loc);
+        console.log(arr);
+        for(var i=0;i<arr.length;i++){
+            var innerbox=document.createElement("div");
+            innerbox.setAttribute("id","al");
+            var dat=document.createElement("div");
+            dat.setAttribute("id","altime");
+            var time=document.createElement("p");
+            var tim=localStorage.getItem(arr[i]);
+            var alm=tim[0]+tim[1]+":"+tim[3]+tim[4];
+            time.textContent=alm;
+            dat.appendChild(time);
+            var del=document.createElement("div");
+            del.setAttribute("id","delbut");
+            var but=document.createElement("button");
+            but.setAttribute("id",arr[i]);
+            but.addEventListener("click",(e)=>{
+                localStorage.removeItem(e.target.id);
+                new Notification("Alarm Deleted");
+                window.location.reload();
+            })
+            but.textContent="Delete Alarm";
+            del.appendChild(but);
+            innerbox.appendChild(dat);
+            innerbox.appendChild(del);
 
-var int=window.setInterval(()=>{Alarm()},1000);
+            box.appendChild(innerbox);
+             
+        }
+   
+   
+}}
+Getalarm();
+
+var int=window.setInterval(()=>{Alarm()},1000)

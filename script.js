@@ -97,9 +97,11 @@ function Alarm(){
     const date=new Date();
     if(localStorage.length>0){
         var chou;var cmin;var alarm="off";
-        for(var i=1;i<=localStorage.length;i++){
-            var no=i-1;
-            var time=localStorage.getItem("alarm"+no);
+        var loc=localStorage;
+        var arr=Object.keys(loc);
+        for(var i=0;i<arr.length;i++){
+        
+            var time=localStorage.getItem(arr[i]);
             var alm=time[0]+time[1]+":"+time[3]+time[4];
             if(date.getHours()<10){
                 chou="0"+date.getHours();
@@ -120,13 +122,19 @@ function Alarm(){
             
             
         }
-        console.log("checking"+alarm);
+        console.log("working");
 		if(alarm=="on"){
-			alert('Alarm');
+			new Notification("Alarm");
+            var con=confirm("Do You Need to cancel the alarm");
+
+            if(con==true){
+                clearInterval(int);
+                console.clear();
+                setInterval(()=>{window.location.reload()},60000);
+            }
 		}
     }
 
 
 }
-
 window.setInterval(()=>{time();Alarm();},1000);
